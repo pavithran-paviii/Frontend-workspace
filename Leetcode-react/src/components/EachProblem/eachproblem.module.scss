@@ -1,0 +1,35 @@
+.eachProblem {
+  padding: 3rem 0 0 3rem;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  & > .title {
+    font-size: 1.4rem;
+  }
+
+  & > .difficultyIndicator {
+    padding: 0.5rem 1rem;
+    width: max-content;
+    font-size: 1rem;
+    border-radius: 30px;
+  }
+
+  & > .difficultyMedium {
+    color: yellow;
+    background-color: rgb(255, 255, 0, 0.1);
+  }
+  & > .difficultyEasy {
+    color: green;
+    background-color: rgb(0, 128, 0, 0.1);
+  }
+  & > .difficultyHard {
+    color: red;
+    background-color: rgb(255, 0, 0, 0.1);
+  }
+
+  & > .description {
+    font-size: 1.2rem;
+  }
+}
