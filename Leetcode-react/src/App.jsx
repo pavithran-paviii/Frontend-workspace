@@ -11,10 +11,10 @@ import RouterPage from "./router";
 function App() {
   return (
     <div className="app">
-      {/* <RouterPage /> */}
+      <RouterPage />
       {/* <Login /> */}
       {/* <Signup /> */}
-      <Problems />
+      {/* <Problems /> */}
       {/* <EachProblem /> */}
     </div>
   );
