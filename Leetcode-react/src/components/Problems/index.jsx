@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "./problems.module.scss";
 
+import axios from "axios";
+
 const Problems = () => {
+  const [allProblems, setAllProblems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/problem")
+      .then((response) => {
+        console.log(response?.data, "all problem response");
+        setAllProblems(response?.data);
+      })
+      .catch((error) => {
+        console.log(error?.message, "all problems error");
+      });
+  }, []);
+
   return (
     <div className={classNames.problems}>
       <table>
@@ -14,12 +30,20 @@ const Problems = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Done</td>
-            <td>2130. Maximum Twin Sum of a Linked List</td>
-            <td>82.8%</td>
-            <td className={classNames.difficulty}>Medium</td>
-          </tr>
+          {Array?.isArray(allProblems) && allProblems?.length > 0
+            ? allProblems?.map(
+                ({ problemId, question, acceptance, difficulty }, index) => {
+                  return (
+                    <tr>
+                      <td>Done</td>
+                      <td>{problemId + "." + question}</td>
+                      <td>{acceptance}</td>
+                      <td className={classNames.difficulty}>{difficulty}</td>
+                    </tr>
+                  );
+                }
+              )
+            : ""}
         </tbody>
       </table>
     </div>
