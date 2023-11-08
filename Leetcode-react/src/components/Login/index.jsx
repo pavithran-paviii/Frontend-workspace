@@ -1,7 +1,10 @@
 import React from "react";
 import classNames from "./login.module.scss";
 
+import axios from "axios";
+
 //assets
+import { BACKEND_URL } from "../../assets/data/constant";
 import leetcodeLogo from "../../assets/images/Logo.svg";
 
 const Login = () => {
@@ -9,7 +12,16 @@ const Login = () => {
     event.preventDefault();
     const email = event.target.elements?.email?.value;
     const password = event.target.elements?.password?.value;
-    console.log(email, password);
+
+    axios
+      .post(`${BACKEND_URL}/login`, { email, password })
+      .then((response) => {
+        console.log(response?.data, "Login API response");
+        // setAllProblems(response?.data);
+      })
+      .catch((error) => {
+        console.log(error?.message, "Login APIs error");
+      });
   }
 
   return (

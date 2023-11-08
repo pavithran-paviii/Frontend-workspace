@@ -20,7 +20,7 @@ const RouterPage = () => {
         <Route index element={<Problems />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/eachproblem" element={<EachProblem />} />
+        <Route path="/:question" element={<EachProblem />} />
       </Route>
     )
   );
@@ -28,17 +28,3 @@ const RouterPage = () => {
 };
 
 export default RouterPage;
-
-const Root = () => {
-  return (
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/signup">Sign Up</Link>
-      {/* <Link></Link> */}
-      <div>
-        <Outlet />
-      </div>
-    </div>
-  );
-};

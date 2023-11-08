@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import classNames from "./problems.module.scss";
 
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+//assets
+import { GlobalContext } from "../../context/GlobalContext";
 
 const Problems = () => {
-  const [allProblems, setAllProblems] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/problem")
-      .then((response) => {
-        console.log(response?.data, "all problem response");
-        setAllProblems(response?.data);
-      })
-      .catch((error) => {
-        console.log(error?.message, "all problems error");
-      });
-  }, []);
+  //imported items
+  const navigate = useNavigate();
+  const { allProblems } = useContext(GlobalContext);
 
   return (
     <div className={classNames.problems}>
@@ -30,20 +23,28 @@ const Problems = () => {
           </tr>
         </thead>
         <tbody>
-          {Array?.isArray(allProblems) && allProblems?.length > 0
-            ? allProblems?.map(
-                ({ problemId, question, acceptance, difficulty }, index) => {
-                  return (
-                    <tr>
-                      <td>Done</td>
-                      <td>{problemId + "." + question}</td>
-                      <td>{acceptance}</td>
-                      <td className={classNames.difficulty}>{difficulty}</td>
-                    </tr>
-                  );
-                }
-              )
-            : ""}
+          {Array?.isArray(allProblems) &&
+            allProblems?.length > 0 &&
+            allProblems?.map(
+              (
+                { problemId, question, acceptance, difficulty, ...rest },
+                index
+              ) => {
+                return (
+                  <tr
+                    key={question + index}
+                    onClick={() => {
+                      navigate(`/${question}`);
+                    }}
+                  >
+                    <td>Done</td>
+                    <td>{index + 1 + "." + question}</td>
+                    <td>{acceptance}</td>
+                    <td className={classNames.difficulty}>{difficulty}</td>
+                  </tr>
+                );
+              }
+            )}
         </tbody>
       </table>
     </div>
